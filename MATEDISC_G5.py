@@ -31,12 +31,10 @@ def menu_transformaciones(puntos):
     print("\t" + "="*60)
 
     opciones = {
-        1: "Ingresar figura ➕",
-        2: "Traslacion ↔",
+        1: "Rotacion 🔄",
+        2: "Reflexion 🪞",
         3: "Homotecia 🔍",
-        4: "Rotacion 🔄",
-        5: "Reflexion 🪞",
-        6: "Salir 🚪"
+        4: "Salir 🚪"
     }
 
     for num, texto in opciones.items():
@@ -62,7 +60,7 @@ def menu_transformaciones(puntos):
         return rotacion(puntos, angulo)
     elif op == 2:
         while True:
-            eje = input("\tIngrese eje (x, y, d para diagonal y=x): ")
+            eje = input("\tIngrese eje (x, y, d para diagonal y=x): ").strip().lower()
             if eje in ['x','y','d']:
                 break
             print("\t !! Solo se permite x, y o d.")
@@ -79,21 +77,6 @@ def menu_transformaciones(puntos):
             except ValueError:
                 print("\t !!! Ingresa valores numericos validos.")
         return homotecia(puntos, kx, ky)
-    elif op == 4:
-        while True:
-            try:
-                angulo = float(input("\tIngrese angulo de rotacion (grados): "))
-                break
-            except ValueError:
-                print("\t !!! Ingresa un valor numerico.")
-        return rotacion(puntos, angulo)
-    elif op == 5:
-        while True:
-            eje = input("\tIngrese eje (x, y, d para diagonal y=x): ")
-            if eje in ['x','y','d']:
-                break
-            print("\t !! Solo se permite x, y o d.")
-        return reflexion(puntos, eje)
     else:
         print("\n🔹 Saliendo del menu...")
         return None
@@ -118,8 +101,8 @@ def main():
     while True:
         try:
             n = int(input("\n\t¿Cuántos puntos tiene la figura?: "))
-            if n < 1:
-                print("\t !! Debe haber al menos 1 punto.")
+            if n < 2:
+                print("\t !! Debe haber al menos 2 puntos minimo.")
                 continue
             break
         except ValueError:
@@ -148,9 +131,12 @@ def main():
 
         puntos = puntos_transf
         
-        seguir = input("\n¿Quieres aplicar otra transformación? (s/n): ")
-        if seguir.lower() != 's':
-            break
+        while True:
+            seguir = input("\n¿Quieres aplicar otra transformacion? (s/n): ").strip().lower()
+            if seguir in ['s', 'n']:
+                break
+            else:
+                print("\t !! Responde con 's' para si o 'n' para no.")
 
 if __name__ == "__main__":
     main()
