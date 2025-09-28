@@ -31,10 +31,10 @@ def menu_transformaciones(puntos):
     print("\t" + "="*60)
 
     opciones = {
-        1: "Rotacion 🔄",
-        2: "Reflexion 🪞",
-        3: "Homotecia 🔍",
-        4: "Salir 🚪"
+        1: "Rotacion",
+        2: "Reflexion",
+        3: "Homotecia",
+        4: "Salir"
     }
 
     for num, texto in opciones.items():
@@ -78,19 +78,31 @@ def menu_transformaciones(puntos):
                 print("\t !!! Ingresa valores numericos validos.")
         return homotecia(puntos, kx, ky)
     else:
-        print("\n🔹 Saliendo del menu...")
+        print("\n\t🔹 Saliendo del menu...")
         return None
 
 def graficar(original, transformada):
-    plt.figure(figsize=(6, 6))
-    plt.axis('equal')
-    plt.plot(original[:,0], original[:,1], 'bo-', label="Original")
-    plt.plot(transformada[:,0], transformada[:,1], 'ro-', label="Transformada")
-    plt.axhline(0, color='gray', linewidth=0.5)
-    plt.axvline(0, color='gray', linewidth=0.5)
-    plt.legend()
-    plt.title("Transformaciones Lineales")
-    plt.grid(True)
+    fig, ax = plt.subplots(figsize=(7, 7))
+    fig.patch.set_facecolor('#f5f5fa')
+    ax.set_facecolor('#eaf6ff')
+    ax.axis('equal')
+    # Original con sombra y marcadores grandes
+    ax.plot(original[:,0], original[:,1], color='#0077b6', marker='o', markersize=8, linewidth=2.5, alpha=0.85, label="Original", zorder=2)
+    # Etiquetas de puntos originales
+    for (x, y) in original:
+        ax.text(x, y, f'({x:.1f},{y:.1f})', fontsize=10, color='#0077b6', ha='right', va='bottom', zorder=3)
+    # Transformada con otro estilo
+    ax.plot(transformada[:,0], transformada[:,1], color='#d90429', marker='s', markersize=8, linewidth=2.5, alpha=0.85, label="Transformada", zorder=2)
+    for (x, y) in transformada:
+        ax.text(x, y, f'({x:.1f},{y:.1f})', fontsize=10, color='#d90429', ha='left', va='top', zorder=3)
+    # Ejes
+    ax.axhline(0, color='#22223b', linewidth=1.2, linestyle='--', alpha=0.7, zorder=1)
+    ax.axvline(0, color='#22223b', linewidth=1.2, linestyle='--', alpha=0.7, zorder=1)
+    # Leyenda y título
+    legend = ax.legend(fontsize=13, loc='upper right', frameon=True, facecolor='#f5f5fa', edgecolor='#22223b')
+    ax.set_title("✨ Transformaciones Lineales ✨", fontsize=18, color='#22223b', pad=20)
+    ax.grid(True, color='#b5b5b5', linestyle=':', linewidth=1, alpha=0.5)
+    plt.tight_layout()
     plt.show()
 
 def main():
