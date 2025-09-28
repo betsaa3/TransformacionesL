@@ -20,16 +20,17 @@ def reflexion(puntos, eje):
                      [1, 0]])
     return puntos @ R.T
 
-def escalamiento(puntos, kx, ky):
+def homotecia(puntos, kx, ky):
     S = np.array([[kx, 0],
                   [0, ky]])
     return puntos @ S.T
 
 def menu_transformaciones(puntos):
-    print("\n\t\t   ----- Transformaciones -----")
-    print("\t------------------------------------------------------")
-    print("\t1. Rotacion | 2. Reflexion | 3. Homotacia | 4. Salir |")
-    print("\t------------------------------------------------------")
+    print("\n\t" + "="*50)
+    print("\t\t   ----- Transformaciones -----")
+    print("\t" + "="*50)
+    print("\t1. Rotacion | 2. Reflexion | 3. Homotecia | 4. Salir |")
+    print("\t" + "="*50)
     
     while True:
         try:
@@ -60,15 +61,20 @@ def menu_transformaciones(puntos):
             try:
                 kx = float(input("\tFactor en X: "))
                 ky = float(input("\tFactor en Y: "))
+                if kx == 0 or ky == 0:
+                    print("\t !! Los factores no pueden ser cero.")
+                    continue
                 break
             except ValueError:
-                print("\t !!! Ingresa numeros validos para kx y ky.")
-        return escalamiento(puntos, kx, ky)
+                print("\t !!! Ingresa valores numéricos válidos.")
+        return homotecia(puntos, kx, ky)
     else:
         print("Saliendo...")
         return None
 
 def graficar(original, transformada):
+    plt.figure(figsize=(6, 6))
+    plt.axis('equal')
     plt.plot(original[:,0], original[:,1], 'bo-', label="Original")
     plt.plot(transformada[:,0], transformada[:,1], 'ro-', label="Transformada")
     plt.axhline(0, color='gray', linewidth=0.5)
@@ -79,9 +85,9 @@ def graficar(original, transformada):
     plt.show()
 
 def main():
-    print("\n\t------------------------------------------------------")
+    print("\n\t" + "-"*50)
     print("\t\t   === Transformaciones Lineales ===")
-    print("\t------------------------------------------------------")
+    print("\t" + "-"*50)
 
     while True:
         try:
@@ -95,9 +101,14 @@ def main():
     puntos = []
 
     for i in range(n):
-        x = float(input(f"\tIngrese x{i+1}: "))
-        y = float(input(f"\tIngrese y{i+1}: "))
-        puntos.append([x, y])
+        while True:
+            try:
+                x = float(input(f"\tIngrese x{i+1}: "))
+                y = float(input(f"\tIngrese y{i+1}: "))
+                puntos.append([x, y])
+                break
+            except ValueError:
+                print("\t !!! Ingresa valores numéricos válidos.")
 
     puntos.append(puntos[0])
     puntos = np.array(puntos)
@@ -109,6 +120,8 @@ def main():
 
         graficar(puntos, puntos_transf)
 
+        puntos = puntos_transf
+        
         seguir = input("\n¿Quieres aplicar otra transformación? (s/n): ")
         if seguir.lower() != 's':
             break
