@@ -26,25 +26,36 @@ def homotecia(puntos, kx, ky):
     return puntos @ S.T
 
 def menu_transformaciones(puntos):
-    print("\n\t" + "="*50)
-    print("\t\t   ----- Transformaciones -----")
-    print("\t" + "="*50)
-    print("\t1. Rotacion | 2. Reflexion | 3. Homotecia | 4. Salir |")
-    print("\t" + "="*50)
-    
+    print("\n\t" + "="*60)
+    print("\t\t\t✨ MENU DE TRANSFORMACIONES ✨")
+    print("\t" + "="*60)
+
+    opciones = {
+        1: "Ingresar figura ➕",
+        2: "Traslacion ↔",
+        3: "Homotecia 🔍",
+        4: "Rotacion 🔄",
+        5: "Reflexion 🪞",
+        6: "Salir 🚪"
+    }
+
+    for num, texto in opciones.items():
+        print(f"\t  [{num}] {texto}")
+    print("\t" + "="*60)
+
     while True:
         try:
-            op = int(input("\tOpcion: "))
-            if op in [1, 2, 3, 4]:
+            op = int(input("\tOpción: "))
+            if op in opciones:
                 break
             else:
-                print("\t !! Ingresa un numero valido (1-4).")
+                print("\t !! Ingresa un numero valido (1-6).")
         except ValueError:
-            print("\t !!! Debes ingresar un número entero.")
+            print("\t !!! Debes ingresar un numero entero.")
     if op == 1:
         while True:
             try:
-                angulo = float(input("\tIngrese angulo de rotación (grados): "))
+                angulo = float(input("\tIngrese angulo de rotacion (grados): "))
                 break
             except ValueError:
                 print("\t !!! Ingresa un valor numerico.")
@@ -66,10 +77,25 @@ def menu_transformaciones(puntos):
                     continue
                 break
             except ValueError:
-                print("\t !!! Ingresa valores numéricos válidos.")
+                print("\t !!! Ingresa valores numericos validos.")
         return homotecia(puntos, kx, ky)
+    elif op == 4:
+        while True:
+            try:
+                angulo = float(input("\tIngrese angulo de rotacion (grados): "))
+                break
+            except ValueError:
+                print("\t !!! Ingresa un valor numerico.")
+        return rotacion(puntos, angulo)
+    elif op == 5:
+        while True:
+            eje = input("\tIngrese eje (x, y, d para diagonal y=x): ")
+            if eje in ['x','y','d']:
+                break
+            print("\t !! Solo se permite x, y o d.")
+        return reflexion(puntos, eje)
     else:
-        print("Saliendo...")
+        print("\n🔹 Saliendo del menu...")
         return None
 
 def graficar(original, transformada):
@@ -85,9 +111,9 @@ def graficar(original, transformada):
     plt.show()
 
 def main():
-    print("\n\t" + "-"*50)
-    print("\t\t   === Transformaciones Lineales ===")
-    print("\t" + "-"*50)
+    print("\n\t" + "="*60)
+    print("\t\t✨ BIENVENIDO A TRANSFORMACIONES LINEALES ✨")
+    print("\t" + "="*60)
 
     while True:
         try:
