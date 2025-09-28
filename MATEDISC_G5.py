@@ -83,7 +83,15 @@ def main():
     print("\t\t   === Transformaciones Lineales ===")
     print("\t------------------------------------------------------")
 
-    n = int(input("\n\t¿Cuantos puntos tiene la figura?: "))
+    while True:
+        try:
+            n = int(input("\n\t¿Cuántos puntos tiene la figura?: "))
+            if n < 1:
+                print("\t !! Debe haber al menos 1 punto.")
+                continue
+            break
+        except ValueError:
+            print("\t !!! Ingresa un número entero válido.")
     puntos = []
 
     for i in range(n):
