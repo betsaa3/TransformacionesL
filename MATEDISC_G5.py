@@ -40,7 +40,6 @@ def menu_transformaciones(puntos):
                 print("\t !! Ingresa un numero valido (1-4).")
         except ValueError:
             print("\t !!! Debes ingresar un número entero.")
-    
     if op == 1:
         while True:
             try:
@@ -48,14 +47,22 @@ def menu_transformaciones(puntos):
                 break
             except ValueError:
                 print("\t !!! Ingresa un valor numerico.")
-        
         return rotacion(puntos, angulo)
     elif op == 2:
-        eje = input("\tIngrese eje (x, y, d para diagonal y=x): ")
+        while True:
+            eje = input("\tIngrese eje (x, y, d para diagonal y=x): ")
+            if eje in ['x','y','d']:
+                break
+            print("\t !! Solo se permite x, y o d.")
         return reflexion(puntos, eje)
     elif op == 3:
-        kx = float(input("\tFactor en X: "))
-        ky = float(input("\tFactor en Y: "))
+        while True:
+            try:
+                kx = float(input("\tFactor en X: "))
+                ky = float(input("\tFactor en Y: "))
+                break
+            except ValueError:
+                print("\t !!! Ingresa numeros validos para kx y ky.")
         return escalamiento(puntos, kx, ky)
     else:
         print("Saliendo...")
