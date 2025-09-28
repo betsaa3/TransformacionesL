@@ -27,7 +27,7 @@ def homotecia(puntos, kx, ky):
 
 def menu_transformaciones(puntos):
     print("\n\t" + "="*60)
-    print("\t\t\t✨ MENU DE TRANSFORMACIONES ✨")
+    print("\t\t\t   MENU DE TRANSFORMACIONES   ")
     print("\t" + "="*60)
 
     opciones = {
@@ -47,7 +47,7 @@ def menu_transformaciones(puntos):
             if op in opciones:
                 break
             else:
-                print("\t !! Ingresa un numero valido (1-6).")
+                print("\t !! Ingresa un numero valido (1-4).")
         except ValueError:
             print("\t !!! Debes ingresar un numero entero.")
     if op == 1:
@@ -78,19 +78,19 @@ def menu_transformaciones(puntos):
                 print("\t !!! Ingresa valores numericos validos.")
         return homotecia(puntos, kx, ky)
     else:
-        print("\n\t🔹 Saliendo del menu...")
+        print("\n\t Saliendo del menu...")
         return None
 
 def graficar(original, transformada):
-    fig, ax = plt.subplots(figsize=(7, 7))
-    fig.patch.set_facecolor('#f5f5fa')
-    ax.set_facecolor('#eaf6ff')
-    ax.axis('equal')
+    fig, ax = plt.subplots(figsize=(7, 7)) #define tamaño de la figura
+    fig.patch.set_facecolor('#f5f5fa') #color de fondo de la figura
+    ax.set_facecolor('#eaf6ff') #color de fondo del grafico
+    ax.axis('equal') #Mantiene la proporción de los ejes
     # Original con sombra y marcadores grandes
-    ax.plot(original[:,0], original[:,1], color='#0077b6', marker='o', markersize=8, linewidth=2.5, alpha=0.85, label="Original", zorder=2)
+    ax.plot(original[:,0], original[:,1], color='#0077b6', marker='o', markersize=8, linewidth=2.5, alpha=0.85, label="Original", zorder=2) #zorder para capas
     # Etiquetas de puntos originales
     for (x, y) in original:
-        ax.text(x, y, f'({x:.1f},{y:.1f})', fontsize=10, color='#0077b6', ha='right', va='bottom', zorder=3)
+        ax.text(x, y, f'({x:.1f},{y:.1f})', fontsize=10, color='#0077b6', ha='right', va='bottom', zorder=3) #Etiquetas con formato
     # Transformada con otro estilo
     ax.plot(transformada[:,0], transformada[:,1], color='#d90429', marker='s', markersize=8, linewidth=2.5, alpha=0.85, label="Transformada", zorder=2)
     for (x, y) in transformada:
@@ -100,14 +100,14 @@ def graficar(original, transformada):
     ax.axvline(0, color='#22223b', linewidth=1.2, linestyle='--', alpha=0.7, zorder=1)
     # Leyenda y título
     legend = ax.legend(fontsize=13, loc='upper right', frameon=True, facecolor='#f5f5fa', edgecolor='#22223b')
-    ax.set_title("✨ Transformaciones Lineales ✨", fontsize=18, color='#22223b', pad=20)
+    ax.set_title(" Transformaciones Lineales ", fontsize=18, color='#22223b', pad=20)
     ax.grid(True, color='#b5b5b5', linestyle=':', linewidth=1, alpha=0.5)
     plt.tight_layout()
     plt.show()
 
 def main():
     print("\n\t" + "="*60)
-    print("\t\t✨ BIENVENIDO A TRANSFORMACIONES LINEALES ✨")
+    print("\t\t   BIENVENIDO A TRANSFORMACIONES LINEALES   ")
     print("\t" + "="*60)
 
     while True:
@@ -149,6 +149,9 @@ def main():
                 break
             else:
                 print("\t !! Responde con 's' para si o 'n' para no.")
+        if seguir == 'n':
+            print("\tFin del programa. Gracias por usar Transformaciones Lineales :)")
+            break
 
 if __name__ == "__main__":
     main()
