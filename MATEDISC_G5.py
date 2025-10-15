@@ -134,7 +134,7 @@ class TransformacionesGUI:
         self.puntos_actuales = puntos_originales.copy()
         self.origen = origen_inicial
         
-        master.title("Transformaciones Lineales Cotton Candy")
+        master.title("Transformaciones Lineales")
         master.geometry("1100x750")
         master.configure(bg=BG_COLOR)
         
